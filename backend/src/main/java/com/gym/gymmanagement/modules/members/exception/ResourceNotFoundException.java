@@ -1,4 +1,4 @@
-package com.gym.gymmanagement.exception;
+package com.gym.gymmanagement.modules.members.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 

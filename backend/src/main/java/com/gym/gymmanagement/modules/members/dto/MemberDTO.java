@@ -1,14 +1,6 @@
-package com.gym.gymmanagement.model;
+package com.gym.gymmanagement.modules.members.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "members")
-public class Member {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class MemberDTO {
 
     private String firstName;
     private String lastName;
@@ -16,24 +8,15 @@ public class Member {
     private String email;
     private String membershipType;
 
-    public Member() {
+    public MemberDTO() {
     }
 
-    public Member(Long id, String firstName, String lastName, String phone, String email, String membershipType) {
-        this.id = id;
+    public MemberDTO(String firstName, String lastName, String phone, String email, String membershipType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.email = email;
         this.membershipType = membershipType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {

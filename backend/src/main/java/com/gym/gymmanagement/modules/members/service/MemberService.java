@@ -1,4 +1,4 @@
-package com.gym.gymmanagement.service;
+package com.gym.gymmanagement.modules.members.service;
 
 import com.gym.dto.MemberDTO;
 import com.gym.exception.ResourceNotFoundException;
