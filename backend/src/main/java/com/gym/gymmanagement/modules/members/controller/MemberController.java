@@ -1,4 +1,4 @@
-package com.gym.gymmanagement.controller;
+package com.gym.gymmanagement.modules.members.controller;
 
 import com.gym.dto.MemberDTO;
 import com.gym.model.Member;
