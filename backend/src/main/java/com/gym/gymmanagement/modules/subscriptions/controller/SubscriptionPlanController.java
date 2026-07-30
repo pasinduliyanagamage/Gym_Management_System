@@ -1,55 +1,34 @@
-package com.gym.gymmanagement.modules.members.controller;
+package com.gym.gymmanagement.modules.subscriptions.model;
 
-import com.gym.dto.MemberDTO;
-import com.gym.model.Member;
-import com.gym.service.MemberService;
-import org.springframework.web.bind.annotation.*;
+import jakarta.persistence.*;
+import lombok.*;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-@RestController
-@RequestMapping("/members")
-public class MemberController {
+@Entity
+@Table(name = "subscription_plans")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SubscriptionPlan {
 
-    private final MemberService service;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public MemberController(MemberService service) {
-        this.service = service;
-    }
+    @Column(nullable = false, unique = true)
+    private String name;
 
-    // Get all members
-    @GetMapping
-    public List<Member> getAllMembers() {
-        return service.getAllMembers();
-    }
+    private String description;
 
-    // Get member by ID
-    @GetMapping("/{id}")
-    public Member getMember(@PathVariable Long id) {
-        return service.getMemberById(id);
-    }
+    @Column(nullable = false)
+    private BigDecimal price;
 
-    // Add member
-    @PostMapping
-    public Member addMember(@RequestBody MemberDTO dto) {
-        return service.addMember(dto);
-    }
+    @Column(nullable = false)
+    private Integer durationInDays; // e.g., 30 for monthly, 365 for annual
 
-    // Update member
-    @PutMapping("/{id}")
-    public Member updateMember(@PathVariable Long id,
-                               @RequestBody MemberDTO dto) {
-
-        return service.updateMember(id, dto);
-    }
-
-    // Delete member
-    @DeleteMapping("/{id}")
-    public String deleteMember(@PathVariable Long id) {
-
-        service.deleteMember(id);
-
-        return "Member deleted successfully.";
-    }
-
+    @Column(nullable = false)
+    private Boolean active = true;
 }

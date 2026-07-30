@@ -1,7 +1,6 @@
-package com.gym.gymmanagement.modules.members.exception;
+package com.gym.gymmanagement.modules.subscriptions.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
-
     public ResourceNotFoundException(String message) {
         super(message);
     }

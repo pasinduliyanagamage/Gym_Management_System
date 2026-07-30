@@ -1,5 +1,8 @@
 package com.gym.gymmanagement.modules.subscriptions.model;
 
-public class PlanType {
-    
+public enum PlanType {
+    MONTHLY,
+    QUARTERLY,
+    SEMI_ANNUAL,
+    ANNUAL
 }
