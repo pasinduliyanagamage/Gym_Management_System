@@ -1,4 +1,4 @@
-public package com.gym.gymmanagement.controller;
+package com.gym.gymmanagement.controller;
 
 import com.gym.gymmanagement.dto.SubscriptionDTO;
 import com.gym.gymmanagement.service.SubscriptionService;
@@ -34,7 +34,8 @@ public class SubscriptionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SubscriptionDTO> updateSubscription(@PathVariable Long id, @RequestBody SubscriptionDTO dto) {
+    public ResponseEntity<SubscriptionDTO> updateSubscription(@PathVariable Long id,
+                                                              @RequestBody SubscriptionDTO dto) {
         return ResponseEntity.ok(subscriptionService.updateSubscription(id, dto));
     }
 
@@ -43,6 +44,4 @@ public class SubscriptionController {
         subscriptionService.deleteSubscription(id);
         return ResponseEntity.noContent().build();
     }
-} SubscriptionController {
-    
 }
