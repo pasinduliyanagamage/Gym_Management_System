@@ -4,6 +4,7 @@ import com.gym.gymmanagement.model.*;
 import com.gym.gymmanagement.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -23,17 +24,30 @@ public class DataInitializer implements CommandLineRunner {
     private final PaymentRepository paymentRepository;
     private final EquipmentRepository equipmentRepository;
     private final AttendanceRepository attendanceRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
+        // Seed admin user
+        if (userRepository.count() == 0) {
+            userRepository.save(User.builder()
+                    .username("admin")
+                    .password(passwordEncoder.encode("admin123"))
+                    .email("admin@fitgym.lk")
+                    .phone("+94 77 000 0000")
+                    .role(Role.ADMIN)
+                    .build());
+        }
+
         if (subscriptionRepository.count() > 0) {
-            return; // Data already initialized
+            return;
         }
 
         // 1. Seed Subscriptions
         Subscription basic = subscriptionRepository.save(Subscription.builder()
                 .planName("Basic Monthly")
-                .price(new BigDecimal("49.99"))
+                .price(new BigDecimal("5000.00"))
                 .durationMonths(1)
                 .description("Access to gym floor & locker rooms during regular hours.")
                 .features("Gym Floor Access, Standard Lockers, Free WiFi")
@@ -41,7 +55,7 @@ public class DataInitializer implements CommandLineRunner {
 
         Subscription premium = subscriptionRepository.save(Subscription.builder()
                 .planName("Premium Quarterly")
-                .price(new BigDecimal("129.99"))
+                .price(new BigDecimal("13500.00"))
                 .durationMonths(3)
                 .description("Full access to all facilities, group classes & 1 free trainer consultation.")
                 .features("All Basic Features, Group Fitness Classes, Sauna Access, 1 Personal Session")
@@ -49,7 +63,7 @@ public class DataInitializer implements CommandLineRunner {
 
         Subscription vip = subscriptionRepository.save(Subscription.builder()
                 .planName("VIP Annual")
-                .price(new BigDecimal("449.99"))
+                .price(new BigDecimal("45000.00"))
                 .durationMonths(12)
                 .description("All-inclusive VIP membership with dedicated personal trainer & unlimited classes.")
                 .features("Unlimited Access, Dedicated Personal Trainer, Free Smoothies, Priority Booking, Sauna & Spa")
@@ -57,44 +71,44 @@ public class DataInitializer implements CommandLineRunner {
 
         // 2. Seed Trainers
         Trainer trainer1 = trainerRepository.save(Trainer.builder()
-                .firstName("Alex")
-                .lastName("Rivers")
-                .email("alex.rivers@fitgym.com")
-                .phone("+1 555-0192")
+                .firstName("Kasun")
+                .lastName("Perera")
+                .email("kasun.p@fitgym.lk")
+                .phone("+94 77 123 4567")
                 .specialization("CrossFit & HIIT")
                 .experienceYears(6)
-                .salary(new BigDecimal("55000"))
+                .salary(new BigDecimal("1200000"))
                 .status("ACTIVE")
                 .build());
 
         Trainer trainer2 = trainerRepository.save(Trainer.builder()
-                .firstName("Elena")
-                .lastName("Rostova")
-                .email("elena.r@fitgym.com")
-                .phone("+1 555-0144")
+                .firstName("Nimali")
+                .lastName("Silva")
+                .email("nimali.s@fitgym.lk")
+                .phone("+94 77 987 6543")
                 .specialization("Yoga & Pilates")
                 .experienceYears(8)
-                .salary(new BigDecimal("60000"))
+                .salary(new BigDecimal("1500000"))
                 .status("ACTIVE")
                 .build());
 
         Trainer trainer3 = trainerRepository.save(Trainer.builder()
-                .firstName("Marcus")
-                .lastName("Vance")
-                .email("marcus.vance@fitgym.com")
-                .phone("+1 555-0188")
+                .firstName("Ruwan")
+                .lastName("Bandara")
+                .email("ruwan.b@fitgym.lk")
+                .phone("+94 71 456 7890")
                 .specialization("Bodybuilding & Strength")
                 .experienceYears(10)
-                .salary(new BigDecimal("72000"))
+                .salary(new BigDecimal("1800000"))
                 .status("ACTIVE")
                 .build());
 
         // 3. Seed Members
         Member member1 = memberRepository.save(Member.builder()
-                .firstName("John")
-                .lastName("Doe")
-                .email("john.doe@example.com")
-                .phone("+1 555-1001")
+                .firstName("Kamal")
+                .lastName("Fernando")
+                .email("kamal.f@example.lk")
+                .phone("+94 77 111 2222")
                 .gender("Male")
                 .joinDate(LocalDate.now().minusMonths(2))
                 .status("ACTIVE")
@@ -103,10 +117,10 @@ public class DataInitializer implements CommandLineRunner {
                 .build());
 
         Member member2 = memberRepository.save(Member.builder()
-                .firstName("Sophia")
-                .lastName("Chen")
-                .email("sophia.chen@example.com")
-                .phone("+1 555-1002")
+                .firstName("Sanduni")
+                .lastName("Silva")
+                .email("sanduni.s@example.lk")
+                .phone("+94 77 333 4444")
                 .gender("Female")
                 .joinDate(LocalDate.now().minusMonths(5))
                 .status("ACTIVE")
@@ -115,10 +129,10 @@ public class DataInitializer implements CommandLineRunner {
                 .build());
 
         Member member3 = memberRepository.save(Member.builder()
-                .firstName("David")
-                .lastName("Miller")
-                .email("david.m@example.com")
-                .phone("+1 555-1003")
+                .firstName("Nuwan")
+                .lastName("Perera")
+                .email("nuwan.p@example.lk")
+                .phone("+94 71 555 6666")
                 .gender("Male")
                 .joinDate(LocalDate.now().minusMonths(1))
                 .status("ACTIVE")
@@ -127,10 +141,10 @@ public class DataInitializer implements CommandLineRunner {
                 .build());
 
         Member member4 = memberRepository.save(Member.builder()
-                .firstName("Emma")
-                .lastName("Watson")
-                .email("emma.w@example.com")
-                .phone("+1 555-1004")
+                .firstName("Tharushi")
+                .lastName("Bandara")
+                .email("tharushi.b@example.lk")
+                .phone("+94 77 777 8888")
                 .gender("Female")
                 .joinDate(LocalDate.now().minusMonths(8))
                 .status("EXPIRED")
@@ -172,7 +186,7 @@ public class DataInitializer implements CommandLineRunner {
         // 5. Seed Payments
         paymentRepository.save(Payment.builder()
                 .member(member1)
-                .amount(new BigDecimal("129.99"))
+                .amount(new BigDecimal("13500.00"))
                 .paymentDate(LocalDateTime.now().minusDays(10))
                 .paymentMethod("CARD")
                 .paymentStatus("PAID")
@@ -181,7 +195,7 @@ public class DataInitializer implements CommandLineRunner {
 
         paymentRepository.save(Payment.builder()
                 .member(member2)
-                .amount(new BigDecimal("449.99"))
+                .amount(new BigDecimal("45000.00"))
                 .paymentDate(LocalDateTime.now().minusDays(25))
                 .paymentMethod("NETBANKING")
                 .paymentStatus("PAID")
@@ -190,7 +204,7 @@ public class DataInitializer implements CommandLineRunner {
 
         paymentRepository.save(Payment.builder()
                 .member(member3)
-                .amount(new BigDecimal("49.99"))
+                .amount(new BigDecimal("5000.00"))
                 .paymentDate(LocalDateTime.now().minusDays(2))
                 .paymentMethod("UPI")
                 .paymentStatus("PAID")
