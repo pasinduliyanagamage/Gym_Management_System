@@ -2,10 +2,13 @@ package com.gym.gymmanagement.controller;
 
 import com.gym.gymmanagement.dto.TrainerDTO;
 import com.gym.gymmanagement.service.TrainerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+
 
 import java.util.List;
 
@@ -28,7 +31,7 @@ public class TrainerController {
     }
 
     @PostMapping
-    public ResponseEntity<TrainerDTO> createTrainer(@RequestBody TrainerDTO dto) {
+    public ResponseEntity<TrainerDTO> createTrainer(@Valid @RequestBody TrainerDTO dto) {
         TrainerDTO created = trainerService.createTrainer(dto);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
