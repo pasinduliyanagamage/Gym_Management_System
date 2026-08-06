@@ -1,0 +1,1 @@
+import{a as t}from"./api-Bsu87Kcu.js";const p={getAll:()=>t.get("/subscriptions"),getById:s=>t.get(`/subscriptions/${s}`),create:s=>t.post("/subscriptions",s),update:(s,e)=>t.put(`/subscriptions/${s}`,e),delete:s=>t.delete(`/subscriptions/${s}`)};export{p as s};

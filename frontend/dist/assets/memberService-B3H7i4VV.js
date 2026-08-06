@@ -1,0 +1,1 @@
+import{a as m}from"./api-Bsu87Kcu.js";const s={getAll:()=>m.get("/members"),getById:e=>m.get(`/members/${e}`),create:e=>m.post("/members",e),update:(e,t)=>m.put(`/members/${e}`,t),delete:e=>m.delete(`/members/${e}`)};export{s as m};

@@ -1,0 +1,1 @@
+import{j as a,b as d}from"./index-DXApPVQu.js";const e=({className:r,children:o})=>a.jsx("div",{className:d("bg-darkSurface/80 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl",r),children:o});export{e as I};
